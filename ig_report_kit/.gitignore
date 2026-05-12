@@ -1,0 +1,8 @@
+# Real cases contain private data — never commit them.
+cases/
+*.pdf
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
