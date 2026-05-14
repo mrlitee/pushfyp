@@ -1,0 +1,14 @@
+{
+  "fitness": ["fitness", "workout", "gymlife", "healthylifestyle", "fitfam", "homeworkout", "strengthtraining", "cardio", "wellness", "abs"],
+  "fyp": ["fyp", "foryou", "foryoupage", "viral", "trending", "threads", "threadsindonesia"],
+  "tech": ["tech", "coding", "programmer", "developer", "webdev", "startup", "AI", "machinelearning", "opensource", "javascript"],
+  "bisnis": ["bisnis", "entrepreneur", "umkm", "jualanonline", "bisnisonline", "marketing", "digitalmarketing", "startupindonesia", "mindset", "financialfreedom"],
+  "kuliner": ["kuliner", "foodie", "makanan", "resep", "kulinerindonesia", "jajanan", "streetfood", "foodphotography", "recipe", "cooking"],
+  "finance": ["finance", "investing", "saham", "reksadana", "financialfreedom", "personalfinance", "moneymindset", "crypto", "tabungan", "melekfinansial"],
+  "parenting": ["parenting", "ibumuda", "parentingtips", "ibuanak", "anakbalita", "parentinghacks", "momlife", "dadlife", "keluarga", "anak"],
+  "travel": ["travel", "traveling", "wisata", "explore", "jalanjalan", "wanderlust", "travelindonesia", "backpacker", "vacation", "traveldiary"],
+  "beauty": ["beauty", "makeup", "skincare", "mua", "beautytips", "skincareroutine", "glowup", "beautyblogger", "kecantikan", "tutorialmakeup"],
+  "fashion": ["fashion", "ootd", "style", "outfitinspo", "fashionblogger", "streetstyle", "ootdindo", "modefashion", "lookbook", "trendymusim"],
+  "edukasi": ["edukasi", "belajar", "tipsbelajar", "mahasiswa", "pelajar", "skillup", "produktif", "selfdevelopment", "motivasi", "growthmindset"],
+  "gaming": ["gaming", "gamer", "esports", "mobilelegends", "valorant", "pubg", "streamer", "gamingcommunity", "letsplay", "gamereview"]
+}

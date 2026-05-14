@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pushfyp"
+version = "0.1.0"
+description = "Toolkit optimasi postingan Threads secara organik (analyzer, hook, hashtag, scheduler)."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "click>=8.1.7",
+    "requests>=2.32.0",
+    "beautifulsoup4>=4.12.3",
+    "python-dotenv>=1.0.1",
+    "apscheduler>=3.10.4",
+    "sqlalchemy>=2.0.0",
+    "rich>=13.7.1",
+]
+
+[project.scripts]
+pushfyp = "pushfyp.cli:cli"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+pushfyp = ["data/*.json"]
