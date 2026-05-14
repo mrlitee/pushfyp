@@ -151,5 +151,20 @@ def post(text: str) -> None:
     console.print(f"[green]Posted[/] media_id={result.media_id}")
 
 
+@cli.command()
+@click.option("--host", default="127.0.0.1", show_default=True)
+@click.option("--port", default=8000, show_default=True, type=int)
+@click.option("--reload", is_flag=True, help="Auto-reload (dev mode).")
+def serve(host: str, port: int, reload: bool) -> None:
+    """Jalankan web app di http://HOST:PORT."""
+    try:
+        import uvicorn
+    except ImportError:
+        console.print("[red]Butuh fastapi+uvicorn. Install:[/] pip install 'pushfyp[web]'")
+        raise SystemExit(1)
+    console.print(f"[green]pushfyp web[/] running at http://{host}:{port}")
+    uvicorn.run("pushfyp.web.main:app", host=host, port=port, reload=reload)
+
+
 if __name__ == "__main__":
     cli()

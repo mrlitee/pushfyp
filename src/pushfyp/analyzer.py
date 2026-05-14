@@ -15,7 +15,7 @@ USER_AGENT = (
 )
 
 THREADS_URL_RE = re.compile(
-    r"^https?://(?:www\.)?threads\.(?:net|com)/@[^/]+/post/[A-Za-z0-9_-]+/?",
+    r"^https?://(?:www\.)?threads\.(?:net|com)/@[^/]+/post/[A-Za-z0-9_-]+(?:/?(?:\?[^#\s]*)?)?$",
     re.IGNORECASE,
 )
 
@@ -53,6 +53,16 @@ def _validate_url(url: str) -> None:
         )
 
 
+def _ca_bundle() -> str | bool:
+    """Pakai bundle dari certifi kalau ada (lebih fresh dari sistem)."""
+    try:
+        import certifi  # type: ignore
+
+        return certifi.where()
+    except ImportError:
+        return True  # fallback: pakai default
+
+
 def fetch_metadata(url: str, timeout: float = 10.0) -> PostMetadata:
     """Ambil metadata postingan via Open Graph tags (publik)."""
     import requests
@@ -60,12 +70,21 @@ def fetch_metadata(url: str, timeout: float = 10.0) -> PostMetadata:
 
     _validate_url(url)
 
-    resp = requests.get(
-        url,
-        headers={"User-Agent": USER_AGENT, "Accept-Language": "en-US,en;q=0.9"},
-        timeout=timeout,
-        allow_redirects=True,
-    )
+    try:
+        resp = requests.get(
+            url,
+            headers={"User-Agent": USER_AGENT, "Accept-Language": "en-US,en;q=0.9"},
+            timeout=timeout,
+            allow_redirects=True,
+            verify=_ca_bundle(),
+        )
+    except requests.exceptions.SSLError as e:
+        raise RuntimeError(
+            "SSL certificate error. CA bundle sistem mungkin expired.\n"
+            "Termux: jalankan `pkg upgrade ca-certificates` atau `pip install --upgrade certifi`.\n"
+            f"Detail: {e}"
+        ) from e
+
     resp.raise_for_status()
     soup = BeautifulSoup(resp.text, "html.parser")
 
