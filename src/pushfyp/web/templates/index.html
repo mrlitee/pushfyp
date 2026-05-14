@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>pushfyp — optimize Threads, organically</title>
+  <meta name="description" content="Analisa postingan Threads, generate hook, dan dapatkan hashtag rekomendasi. Toolkit organik, no bot, no spam." />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <h1>push<span>fyp</span></h1>
+      <p class="tagline">Toolkit optimasi Threads — organik, no bot, no spam.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <nav class="tabs" role="tablist">
+      <button class="tab active" data-tab="analyze" role="tab">Analyze</button>
+      <button class="tab" data-tab="hook" role="tab">Hook</button>
+      <button class="tab" data-tab="hashtags" role="tab">Hashtags</button>
+      <button class="tab" data-tab="schedule" role="tab">Schedule</button>
+    </nav>
+
+    <!-- ANALYZE -->
+    <section class="panel active" id="panel-analyze">
+      <h2>Analisa Postingan</h2>
+      <p class="hint">Paste link Threads publik. Tool akan ambil metadata via Open Graph, lalu kasih skor 0-100 + saran perbaikan.</p>
+      <form id="form-analyze">
+        <input type="url" name="url" placeholder="https://www.threads.net/@username/post/C5abcDEF" required />
+        <button type="submit">Analyze</button>
+      </form>
+      <div class="result" id="result-analyze"></div>
+    </section>
+
+    <!-- HOOK -->
+    <section class="panel" id="panel-hook">
+      <h2>Generate Hook</h2>
+      <p class="hint">Bikin 10 variasi kalimat pembuka dari topik. Set <code>OPENAI_API_KEY</code> untuk hasil LLM, default rule-based.</p>
+      <form id="form-hook">
+        <input type="text" name="topic" placeholder="contoh: belajar coding otodidak" required />
+        <label class="check"><input type="checkbox" name="use_llm" checked /> Pakai LLM jika tersedia</label>
+        <button type="submit">Generate</button>
+      </form>
+      <div class="result" id="result-hook"></div>
+    </section>
+
+    <!-- HASHTAGS -->
+    <section class="panel" id="panel-hashtags">
+      <h2>Rekomendasi Hashtag</h2>
+      <p class="hint">Pilih niche → dapatkan hashtag relevan. Threads suka 1-3 hashtag tertarget.</p>
+      <form id="form-hashtags">
+        <select name="niche" id="select-niche" required></select>
+        <input type="number" name="count" value="5" min="1" max="10" />
+        <label class="check"><input type="checkbox" name="include_fyp" checked /> Tambah hashtag fyp generic</label>
+        <button type="submit">Rekomendasikan</button>
+      </form>
+      <div class="result" id="result-hashtags"></div>
+    </section>
+
+    <!-- SCHEDULE -->
+    <section class="panel" id="panel-schedule">
+      <h2>Auto-Post Schedule</h2>
+      <p class="hint">
+        Jadwalkan posting via <strong>Threads Graph API resmi</strong>.
+        Butuh <code>THREADS_ACCESS_TOKEN</code> + <code>THREADS_USER_ID</code> di <code>.env</code> server.
+      </p>
+      <form id="form-schedule">
+        <textarea name="text" rows="4" maxlength="500" placeholder="Isi postingan kamu..." required></textarea>
+        <input type="datetime-local" name="when" />
+        <small>Kosongkan untuk pakai slot rekomendasi terdekat (07:30 / 12:15 / 20:00).</small>
+        <div class="row">
+          <button type="submit">Jadwalkan</button>
+          <button type="button" id="btn-post-now" class="secondary">Post Sekarang</button>
+        </div>
+      </form>
+      <div class="result" id="result-schedule"></div>
+    </section>
+  </main>
+
+  <footer class="container">
+    <p>
+      Tool ini <strong>tidak</strong> memanipulasi engagement.
+      Manipulasi melanggar ToS Meta dan bisa men-suspend akun kamu.
+      <a href="https://github.com/mrlitee/pushfyp" target="_blank" rel="noopener">Source</a>
+    </p>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

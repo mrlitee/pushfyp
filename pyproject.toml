@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "pushfyp"
 version = "0.1.0"
-description = "Toolkit optimasi postingan Threads secara organik (analyzer, hook, hashtag, scheduler)."
+description = "Toolkit + web app optimasi postingan Threads secara organik (analyzer, hook, hashtag, scheduler)."
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
@@ -18,6 +18,13 @@ dependencies = [
     "rich>=13.7.1",
 ]
 
+[project.optional-dependencies]
+web = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.30.0",
+    "pydantic>=2.7.0",
+]
+
 [project.scripts]
 pushfyp = "pushfyp.cli:cli"
 
@@ -25,4 +32,8 @@ pushfyp = "pushfyp.cli:cli"
 where = ["src"]
 
 [tool.setuptools.package-data]
-pushfyp = ["data/*.json"]
+pushfyp = [
+    "data/*.json",
+    "web/templates/*.html",
+    "web/static/*",
+]
